@@ -1,4 +1,6 @@
+from tkinter.filedialog import askdirectory
 import os
+
 
 def find_extension(file):
     # Open the file in binary mode
@@ -10,14 +12,18 @@ def find_extension(file):
         # and return the corresponding extension
         if hex_code == "89504e47":
             return ".png"
-        elif hex_code == "47494638":
-            return ".gif"
         elif hex_code == "ffd8ffe0" or hex_code == "ffd8ffe1":
             return ".jpeg"
         elif hex_code == "25504446":
             return ".pdf"
         elif hex_code == "4d4d002a" or hex_code == "49492a00":
             return ".tiff"
+        elif hex_code == "25504446":
+            return ".pdf"
+        elif hex_code == "0D444F43":
+            return ".doc"
+        elif hex_code == "504B0304":
+            return ".docx"
         else:
             # If no matching hex code is found, return an empty string
             return ""
@@ -54,6 +60,6 @@ def process_directory(directory):
             else:
                 print(f"The extension of {file} could not be determined")
 
-# Test the code with a sample directory
-directory = "C:\Test Files"
+
+directory = '{}'.format(askdirectory(mustexist = True)) # GUI to allow user to select path
 process_directory(directory)
